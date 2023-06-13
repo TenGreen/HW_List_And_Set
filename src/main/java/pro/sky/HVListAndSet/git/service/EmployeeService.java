@@ -6,13 +6,11 @@ import pro.sky.HVListAndSet.git.exeption.EmployeeAlreadyAddedExeptoin;
 import pro.sky.HVListAndSet.git.exeption.EmployeeNotFoundExeptoin;
 import pro.sky.HVListAndSet.git.exeption.EmployeeStorageIsFullExeptoin;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class  EmployeeService {
-    private final List<Employee> employees = new ArrayList<>();
+    private final Map<String, Employee> employees = new HashMap<>();
     private static final int MAX_SIZE = 5;
 
     public Employee add(String firstName, String lastName) {
@@ -20,33 +18,32 @@ public class  EmployeeService {
             throw new EmployeeStorageIsFullExeptoin();
         }
         Employee employeeToAdd = new Employee(firstName, lastName);
-        if (employees.contains(employeeToAdd)) {
+        if (employees.containsKey(createCey(firstName, lastName))) {
             throw new EmployeeAlreadyAddedExeptoin();
         }
-        employees.add(employeeToAdd);
+        employees.put(createCey(firstName, lastName), employeeToAdd);
         return employeeToAdd;
     }
 
     public Employee remove(String firstName, String lastName) {
-        Employee employeeToRemove = new Employee(firstName, lastName);
-        if (!employees.contains(employeeToRemove)) {
+        if (!employees.containsKey(createCey(firstName, lastName))) {
             throw new EmployeeNotFoundExeptoin();
         }
-        employees.remove(employeeToRemove);
-        return employeeToRemove;
+        return employees.remove(createCey(firstName, lastName));
     }
 
     public Employee find(String firstName, String lastName) {
-        for (Employee employee : employees) {
-            if (firstName.equalsIgnoreCase(employee.getFirstName())
-                    && lastName.equalsIgnoreCase(employee.getLastName())) {
-                return employee;
-            }
+        if (!employees.containsKey(createCey(firstName, lastName))) {
+            throw new EmployeeNotFoundExeptoin();
         }
-        throw new EmployeeNotFoundExeptoin();
+        return employees.get(createCey(firstName, lastName));
     }
 
     public List<Employee> getAll() {
-        return Collections.unmodifiableList(employees);
+        return Collections.unmodifiableList(new ArrayList<>(employees.values()));
+    }
+
+    private String createCey(String firstName, String lastName) {
+        return (firstName + lastName).toLowerCase();
     }
 }
