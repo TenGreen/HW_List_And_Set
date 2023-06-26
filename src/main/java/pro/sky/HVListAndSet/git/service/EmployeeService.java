@@ -13,11 +13,13 @@ public class  EmployeeService {
     private final Map<String, Employee> employees = new HashMap<>();
     private static final int MAX_SIZE = 5;
 
-    public Employee add(String firstName, String lastName) {
+
+
+    public Employee add(String firstName, String lastName, int department, double salary) {
         if (employees.size() >= MAX_SIZE) {
             throw new EmployeeStorageIsFullExeptoin();
         }
-        Employee employeeToAdd = new Employee(firstName, lastName);
+        Employee employeeToAdd = new Employee(firstName, lastName, department, salary);
         if (employees.containsKey(createCey(firstName, lastName))) {
             throw new EmployeeAlreadyAddedExeptoin();
         }
