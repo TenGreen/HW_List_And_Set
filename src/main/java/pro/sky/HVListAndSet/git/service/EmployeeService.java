@@ -15,6 +15,10 @@ public class EmployeeService {
     private final Map<String, Employee> employees = new HashMap<>();
     private static final int MAX_SIZE = 5;
 
+    public void add(Employee actual) {
+        employees.put(createCey(actual.getFirstName(), actual.getLastName()), actual);
+
+    }
 
     public Employee add(String firstName, String lastName, int department, double salary) {
         if (!StringUtils.isAlpha(firstName)||!StringUtils.isAlpha(lastName)) {
@@ -48,6 +52,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getAll() {
+        //return List.copyOf(employees.values());
         return Collections.unmodifiableList(new ArrayList<>(employees.values()));
     }
 
