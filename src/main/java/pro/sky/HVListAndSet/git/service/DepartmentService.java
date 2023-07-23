@@ -17,7 +17,13 @@ public class DepartmentService {
         this.employeeService = employeeService;
     }
 
-    public Employee getEmployeeWithMasSalary(int department) {
+    public double getEmployeesSalarySum(int department) {
+        return employeeService.getAll().stream()
+                .filter(e ->e.getDepartment() == department)
+                .mapToDouble(Employee::getSalary)
+                .sum();
+    }
+    public Employee getEmployeeWithMaxSalary(int department) {
         return employeeService.getAll().stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .max(Comparator.comparingDouble(Employee::getSalary))

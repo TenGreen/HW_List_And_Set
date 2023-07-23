@@ -7,7 +7,8 @@ import pro.sky.HVListAndSet.git.exeption.EmployeeAlreadyAddedExeptoin;
 import pro.sky.HVListAndSet.git.exeption.EmployeeNotFoundExeptoin;
 import pro.sky.HVListAndSet.git.exeption.EmployeeStorageIsFullExeptoin;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EmployeeServiceTest {
     EmployeeService employeeService = new EmployeeService();
@@ -28,8 +29,8 @@ public class EmployeeServiceTest {
     void whenNotUniqThenTrowException() {
         Employee employee = new Employee("name", "second_name", 1,1);
         employeeService.add(employee);
-        Assertions.assertNotNull(employee);
-        Assertions.assertThrows(EmployeeAlreadyAddedExeptoin.class, () -> employeeService.add(employee));
+        assertNotNull(employee);
+        assertThrows(EmployeeAlreadyAddedExeptoin.class, () -> employeeService.add(employee));
 
 
     }
@@ -38,7 +39,7 @@ public class EmployeeServiceTest {
     void addPositive() {
         Employee employee = new Employee("name", "second_name", 1,1);
         employeeService.add(employee);
-        Assertions.assertThrows(employeeService.getAll().contains(employee));
+        assertThrows(employeeService.getAll().contains(employee));
     }
 
     @Test
@@ -46,8 +47,8 @@ public class EmployeeServiceTest {
         Employee employee = new Employee("name", "second_name", 1,1);
         employeeService.add(employee);
         Employee actual = employeeService.find("name", "second_name");
-        Assertions.assertNotNull(actual);
-        Assertions.assertEquals(employee, actual);
+        assertNotNull(actual);
+        assertEquals(employee, actual);
     }
 
     @Test
@@ -55,7 +56,7 @@ public class EmployeeServiceTest {
         Employee employee = new Employee("name", "second_name", 1,1);
         employeeService.add(employee);
 
-        Assertions.assertThrows(EmployeeNotFoundExeptoin.class, () -> employeeService.find("not_name", "not_last_name"));
+        assertThrows(EmployeeNotFoundExeptoin.class, () -> employeeService.find("not_name", "not_last_name"));
     }
 
     @Test
@@ -63,7 +64,7 @@ public class EmployeeServiceTest {
         Employee employee = new Employee("name", "second_name", 1,1);
         employeeService.add(employee);
         employeeService.remove("name", "second_name");
-        Assertions.assertFalse(employeeService.getAll().contains(employee));
+        assertFalse(employeeService.getAll().contains(employee));
     }
 
     @Test
@@ -71,7 +72,7 @@ public class EmployeeServiceTest {
         Employee employee = new Employee("name", "second_name", 1,1);
         employeeService.add(employee);
         Employee actual = employeeService.find("name", "second_name");
-        Assertions.assertNull(actual);
+        assertNull(actual);
     }
 
 }
