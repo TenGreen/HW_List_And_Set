@@ -22,14 +22,15 @@ public class EmployeeServiceTest {
                     "second_name" + additionChar, 1, 1);
             employeeService.add(actualEmployee);
         }
-        assertThrows(EmployeeStorageIsFullExeptoin.class, () -> employeeService.add("q", "w", 1, 1));
+        assertThrows(EmployeeStorageIsFullExeptoin.class,
+                () -> employeeService.add("q", "w", 1, 1));
     }
 
     @Test
     void whenNotUniqThenTrowException() {
         Employee employee = new Employee("name", "second_name", 1,1);
+        //Employee actual = new Employee("no_name", "no_second_name", 1, 1);
         employeeService.add(employee);
-        assertNotNull(employee);
         assertThrows(EmployeeAlreadyAddedExeptoin.class, () -> employeeService.add(employee));
 
 
@@ -39,7 +40,7 @@ public class EmployeeServiceTest {
     void addPositive() {
         Employee employee = new Employee("name", "second_name", 1,1);
         employeeService.add(employee);
-        assertThrows(employeeService.getAll().contains(employee));
+        assertTrue(employeeService.getAll().contains(employee));
     }
 
     @Test
@@ -55,7 +56,6 @@ public class EmployeeServiceTest {
     void findNegative() {
         Employee employee = new Employee("name", "second_name", 1,1);
         employeeService.add(employee);
-
         assertThrows(EmployeeNotFoundExeptoin.class, () -> employeeService.find("not_name", "not_last_name"));
     }
 
@@ -71,6 +71,7 @@ public class EmployeeServiceTest {
     void removeNegative() {
         Employee employee = new Employee("name", "second_name", 1,1);
         employeeService.add(employee);
+        employeeService.remove(employee.getFirstName(), employee.getLastName());
         Employee actual = employeeService.find("name", "second_name");
         assertNull(actual);
     }

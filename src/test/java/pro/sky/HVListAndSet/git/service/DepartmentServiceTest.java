@@ -10,10 +10,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pro.sky.HVListAndSet.git.Employee;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DepartmentServiceTest {
 
-    public static final Collections EMPLOYEES = Arrays.asList(
+    public static final Collection EMPLOYEES = Arrays.asList(
             new Employee("ivan", "ivanov", 1, 10000),
             new Employee("Oleg", "Olegovish", 1, 15000),
             new Employee("Olga", "Olegovna", 2, 15000),
@@ -73,7 +70,7 @@ public class DepartmentServiceTest {
     @Test
     void getAllByDepartment() {
         List<Employee> actual = departmentService.getAll(3);
-        Collections<Employee> excpected = Collections.singletonList(
+        Collection<Employee> excpected = Collections.singleton(
                 new Employee("Marina", "Sergeevna", 3, 20000));
         assertIterableEquals(excpected, actual);
     }
@@ -81,7 +78,7 @@ public class DepartmentServiceTest {
     @Test
     void getAll() {
         Map<Integer, List<Employee>> actual = departmentService.getAll();
-        Employee sergey = new Employee("sergey", "sergeev", 3, 20000);
+        Employee sergey = new Employee("Sergey", "Mihailovish", 2, 20000);
         assertTrue(actual.get(3).contains(sergey));
         assertFalse(actual.get(2).contains(sergey));
 

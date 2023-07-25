@@ -1,8 +1,9 @@
 package pro.sky.HVListAndSet.git;
 
+import java.util.Collection;
 import java.util.Objects;
 
-public class Employee {
+public class Employee  {
     private String firstName;
     private String lastName;
     private int department;
