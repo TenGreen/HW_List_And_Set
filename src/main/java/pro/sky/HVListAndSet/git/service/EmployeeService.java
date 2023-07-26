@@ -16,14 +16,23 @@ public class EmployeeService {
     private static final int MAX_SIZE = 5;
 
     public void add(Employee actual) {
-
+        if (!StringUtils.isAlpha(actual.getFirstName()) || !StringUtils.isAlpha(actual.getLastName())) {
+            throw new InvalidDataExeption();
+        }
+        if (employees.size() >= MAX_SIZE) {
+            throw new EmployeeStorageIsFullExeptoin();
+        }
+        if (employees.containsKey(createCey(actual.getFirstName(), actual.getLastName()))) {
+            throw new EmployeeAlreadyAddedExeptoin();
+        }
+        correctCase(actual);
         employees.put(createCey(actual.getFirstName(), actual.getLastName()), actual);
 
 
     }
 
     public Employee add(String firstName, String lastName, int department, double salary) {
-        if (!StringUtils.isAlpha(firstName)||!StringUtils.isAlpha(lastName)) {
+        if (!StringUtils.isAlpha(firstName) || !StringUtils.isAlpha(lastName)) {
             throw new InvalidDataExeption();
         }
         if (employees.size() >= MAX_SIZE) {
