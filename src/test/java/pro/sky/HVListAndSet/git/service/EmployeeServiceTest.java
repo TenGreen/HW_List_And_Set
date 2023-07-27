@@ -28,8 +28,7 @@ public class EmployeeServiceTest {
 
     @Test
     void whenNotUniqThenTrowException() {
-        Employee employee = new Employee("name", "second_name", 1,1);
-        //Employee actual = new Employee("no_name", "no_second_name", 1, 1);
+        Employee employee = new Employee("Lname", "Sname", 1,1);
         employeeService.add(employee);
         assertThrows(EmployeeAlreadyAddedExeptoin.class, () ->
                 employeeService.add(employee));
