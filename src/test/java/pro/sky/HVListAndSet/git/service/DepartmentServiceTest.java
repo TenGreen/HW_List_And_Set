@@ -31,19 +31,7 @@ public class DepartmentServiceTest {
     @InjectMocks
     DepartmentService departmentService;
 
-    //  @BeforeEach
-    // void init() {
-    //     employeeService = Mockito.mock(EmployeeService.class);
-    //    departmentService = new DepartmentService(employeeService);
-    //}
 
-    // @Test
-    // void test() {
-    //     Mockito.when(employeeService.getAll()).thenReturn(Arrays.asList(
-    //             new Employee("rew", "tre", 1, 1)
-    //     ));
-    //     System.out.println(departmentService.getAll(1));
-    // }
     @BeforeEach
     void init() {
         Mockito.when(employeeService.getAll()).thenReturn((List<Employee>) EMPLOYEES);

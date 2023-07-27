@@ -31,7 +31,7 @@ public class EmployeeServiceTest {
         Employee employee = new Employee("Lname", "Sname", 1,1);
         employeeService.add(employee);
         assertThrows(EmployeeAlreadyAddedExeptoin.class, () ->
-                employeeService.add(employee));
+                employeeService.add("Lname","Sname", 1,1));
 
 
     }
