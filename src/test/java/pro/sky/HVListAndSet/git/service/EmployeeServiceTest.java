@@ -72,8 +72,9 @@ public class EmployeeServiceTest {
         Employee employee = new Employee("Fname", "Sname", 1,1);
         employeeService.add(employee);
         employeeService.remove(employee.getFirstName(), employee.getLastName());
-        Employee actual = employeeService.find("Fname", "Sname");
-        assertNull(actual);
+//        Employee actual = employeeService.find("Fname", "Sname");
+//        assertNull(actual);
+        assertThrows(EmployeeNotFoundExeptoin.class,() -> employeeService.find("Fname", "Sname"));
     }
 
 }
