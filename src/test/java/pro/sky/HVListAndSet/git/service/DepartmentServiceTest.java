@@ -67,8 +67,8 @@ public class DepartmentServiceTest {
     void getAll() {
         Map<Integer, List<Employee>> actual = departmentService.getAll();
         Employee sergey = new Employee("Sergey", "Mihailovish", 2, 20000);
-        assertTrue(actual.get(3).contains(sergey));
-        assertFalse(actual.get(2).contains(sergey));
+        assertTrue(actual.get(2).contains(sergey));
+        assertFalse(actual.get(3).contains(sergey));
 
         assertEquals(3, actual.keySet().size());
     }

@@ -28,10 +28,10 @@ public class EmployeeServiceTest {
 
     @Test
     void whenNotUniqThenTrowException() {
-        Employee employee = new Employee("Lname", "Sname", 1,1);
+        Employee employee = new Employee("name", "family", 1,1);
         employeeService.add(employee);
         assertThrows(EmployeeAlreadyAddedExeptoin.class, () ->
-                employeeService.add("Lname","Sname", 1,1));
+                employeeService.add("name","family", 1,1));
 
 
     }
@@ -69,10 +69,10 @@ public class EmployeeServiceTest {
 
     @Test
     void removeNegative() {
-        Employee employee = new Employee("name", "second_name", 1,1);
+        Employee employee = new Employee("Fname", "Sname", 1,1);
         employeeService.add(employee);
         employeeService.remove(employee.getFirstName(), employee.getLastName());
-        Employee actual = employeeService.find("name", "second_name");
+        Employee actual = employeeService.find("Fname", "Sname");
         assertNull(actual);
     }
 
